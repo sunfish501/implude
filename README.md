@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IMPLUDE
 
-## Getting Started
+> 상상한 대로 만들어라
 
-First, run the development server:
+한국디지털미디어고등학교 앱 개발 동아리 **임플루드**의 웹사이트입니다.
+
+## 개발
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000 에서 확인할 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 내용 고치기
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 문구, 연혁, 연락처, 지원 링크: `src/content.ts`
+- 로고(벡터): `src/components/LogoMark.tsx`, 파비콘은 `src/app/icon.svg`
+- 원본 로고 이미지: `public/brand/implude-logo.webp`
+- 색상·타이포: `src/app/globals.css` 맨 위 `:root`
 
-## Learn More
+모집 기간에는 `src/content.ts`의 `APPLY_URL`을 지원 폼 주소로 바꿔 주세요.
 
-To learn more about Next.js, take a look at the following resources:
+## 배포
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel에 저장소를 연결하면 별도 설정 없이 배포됩니다.

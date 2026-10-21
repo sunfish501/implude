@@ -16,7 +16,7 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "IMPLUDE — 상상한 대로 만들어라",
-  description: "한국디지털미디어고등학교 앱 개발 동아리 임플루드. 상상한 대로 만들어라.",
+  description: "임플루드는 한국디지털미디어고등학교 앱 개발 동아리입니다. 프로젝트, 연혁, 모집 안내를 확인하세요.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

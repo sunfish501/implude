@@ -1,145 +1,187 @@
+import Image from "next/image";
 import LogoMark from "@/components/LogoMark";
-import { APPLY_URL, contacts, history, stack, steps, wanted } from "@/content";
+import SiteHeader from "@/components/SiteHeader";
+import {
+  APPLY_FORM_URL,
+  contacts,
+  history,
+  historyRange,
+  projects,
+  recruitFields,
+  recruitSteps,
+  stack,
+  steps,
+} from "@/content";
+
+function NewTab() {
+  return (
+    <>
+      <span className="ext" aria-hidden>↗</span>
+      <span className="sr-only">(새 창)</span>
+    </>
+  );
+}
 
 export default function Home() {
   return (
     <>
-      <header className="nav">
-        <div className="wrap nav-inner">
-          <a href="#top" className="brand" aria-label="IMPLUDE 홈">
-            <LogoMark size={30} />
-            <span className="wordmark">IMPLUDE</span>
-          </a>
-          <nav className="nav-links" aria-label="주요 메뉴">
-            <a href="#about">소개</a>
-            <a href="#history">연혁</a>
-            <a href="#contact">연락</a>
-          </nav>
-          <a href="#recruit" className="btn btn-sm">지원하기</a>
-        </div>
-      </header>
+      <a href="#main" className="skip-link">본문으로 건너뛰기</a>
+      <SiteHeader />
 
-      <main id="top">
-        <section className="hero wrap">
+      <main id="main">
+        <section className="hero wrap" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="eyebrow">한국디지털미디어고등학교 앱 개발 동아리</p>
-            <h1 className="headline">
-              <span className="imagine">상상한 대로</span>
-              <span className="make">만들어라.</span>
+            <h1 id="hero-title" className="headline">
+              <span className="imagine">상상한 대로</span> <span className="make">만들어라.</span>
             </h1>
             <p className="lead">
-              임플루드는 2015년부터 머릿속 아이디어를 손에 쥘 수 있는 앱으로 옮겨 온 동아리입니다.
-              기획부터 디자인, 개발, 출시까지 직접 해 봅니다.
+              임플루드는 한국디지털미디어고등학교 앱 개발 동아리입니다. 팀을 이뤄 앱을 기획하고 디자인하며
+              개발합니다.
             </p>
             <div className="actions">
-              <a href="#recruit" className="btn">지원하기</a>
-              <a href="#about" className="btn btn-ghost">어떻게 만드는지 보기</a>
+              <a href="#recruit" className="btn">모집 안내</a>
+              <a href="#projects" className="btn btn-ghost">프로젝트 보기</a>
             </div>
           </div>
-
-          <figure className="hero-mark">
-            <LogoMark animated size={440} className="hero-logo" />
-            <figcaption className="legend">
-              <span><i className="dot dot-blue" />상상</span>
-              <span><i className="dot dot-ink" />만듦</span>
-              <span className="legend-note">두 고리가 맞물리면 앱이 됩니다</span>
-            </figcaption>
-          </figure>
+          <LogoMark animated size={300} className="hero-logo" />
         </section>
 
-        <section id="about" className="section wrap">
+        <section id="projects" className="section wrap" aria-labelledby="projects-title">
           <div className="section-head">
-            <p className="tag">How we make</p>
-            <h2>한 학기, 하나의 앱.</h2>
-            <p className="section-lead">
-              임플루드의 프로젝트는 늘 같은 순서로 흘러갑니다. 상상에서 시작해 실제 사용자 손에 닿을 때까지.
-            </p>
+            <h2 id="projects-title">프로젝트</h2>
+            <p className="section-lead">부원들이 팀을 이뤄 만든 서비스입니다.</p>
           </div>
 
-          <ol className="steps">
-            {steps.map((s, i) => (
-              <li key={s.verb} className="step">
-                <span className="step-num">{String(i + 1).padStart(2, "0")}</span>
-                <p className="step-verb">{s.verb}</p>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
+          <ul className="projects">
+            {projects.map((p) => (
+              <li key={p.name} className="project">
+                <div className="project-shot">
+                  <Image
+                    src={p.image}
+                    alt={p.alt}
+                    width={1280}
+                    height={720}
+                    sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 360px"
+                  />
+                </div>
+                <div className="project-body">
+                  <h3>
+                    {p.name}
+                    <span className="project-year">{p.year}</span>
+                  </h3>
+                  <p>{p.summary}</p>
+                  {p.award && <p className="project-award">{p.award}</p>}
+                  {p.link && (
+                    <a href={p.link.href} target="_blank" rel="noreferrer" className="text-link">
+                      {p.link.label}
+                      <NewTab />
+                    </a>
+                  )}
+                </div>
               </li>
             ))}
-          </ol>
-
-          <div className="stack">
-            <span className="stack-label">우리가 쓰는 도구</span>
-            <ul>
-              {stack.map((t) => (
-                <li key={t}>{t}</li>
-              ))}
-            </ul>
-          </div>
+          </ul>
         </section>
 
-        <section id="history" className="section section-tint">
-          <div className="wrap history">
+        <section id="process" className="section section-tint" aria-labelledby="process-title">
+          <div className="wrap">
             <div className="section-head">
-              <p className="tag">History</p>
-              <h2>상상이 기록이 된 순간들.</h2>
+              <h2 id="process-title">활동 방식</h2>
+              <p className="section-lead">
+                프론트엔드, 백엔드, 디자인, 기획 분야별로 배우고 팀 프로젝트를 진행합니다.
+              </p>
             </div>
 
-            <ol className="timeline">
-              <li className="tl-row tl-next">
-                <span className="tl-year">Next</span>
-                <p>다음 줄은 여러분이 씁니다.</p>
-              </li>
-              {history.map((h) => (
-                <li key={h.year} className="tl-row">
-                  <span className="tl-year">{h.year}</span>
-                  <ul>
-                    {h.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+            <ol className="steps">
+              {steps.map((s, i) => (
+                <li key={s.title} className="step">
+                  <span className="step-num">{String(i + 1).padStart(2, "0")}</span>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
                 </li>
               ))}
             </ol>
+
+            <p className="stack">
+              <span className="stack-label">프로젝트에서 사용한 기술</span>
+              <span className="stack-list">{stack.join(" · ")}</span>
+            </p>
           </div>
         </section>
 
-        <section id="recruit" className="recruit">
+        <section id="history" className="section wrap history" aria-labelledby="history-title">
+          <div className="section-head">
+            <h2 id="history-title">주요 연혁</h2>
+            <p className="section-lead">{historyRange} 주요 기록</p>
+          </div>
+
+          <ol className="timeline">
+            {history.map((h) => (
+              <li key={h.year} className="tl-row">
+                <span className="tl-year">{h.year}</span>
+                <ul>
+                  {h.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="recruit" className="recruit" aria-labelledby="recruit-title">
           <div className="wrap recruit-inner">
             <div>
-              <p className="tag tag-on-blue">Recruit</p>
-              <h2>
-                혹시 당신도
-                <br />
-                앱을 만들고 싶다면?
-              </h2>
+              <h2 id="recruit-title">모집 안내</h2>
               <p className="recruit-lead">
-                코딩 경험이 없어도 괜찮습니다. 만들고 싶은 게 하나 있으면 충분합니다.
+                신입 부원은 매년 3월(일반동아리)과 4월(창업동아리)에 모집해 왔습니다.
               </p>
-              <a href={APPLY_URL} className="btn btn-invert">지원하기</a>
+              <div className="actions">
+                <a href={APPLY_FORM_URL} target="_blank" rel="noreferrer" className="btn btn-invert">
+                  지원서 작성
+                  <NewTab />
+                </a>
+                <a href="#contact" className="btn btn-outline-light">모집 문의</a>
+              </div>
             </div>
-            <div className="wanted">
-              <p className="wanted-label">이런 사람을 찾습니다</p>
-              <ul>
-                {wanted.map((w) => (
-                  <li key={w}>{w}</li>
-                ))}
-              </ul>
+
+            <div className="recruit-facts">
+              <dl>
+              <div>
+                <dt>모집 분야</dt>
+                <dd>{recruitFields.join(" · ")}</dd>
+              </div>
+              <div>
+                <dt>선발 절차</dt>
+                <dd>
+                  <ol className="recruit-steps">
+                    {recruitSteps.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </ol>
+                </dd>
+              </div>
+              </dl>
+              <p className="recruit-note">2025년 모집 기준입니다. 올해 일정은 문의해 주세요.</p>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="section wrap">
+        <section id="contact" className="section wrap" aria-labelledby="contact-title">
           <div className="section-head">
-            <p className="tag">Contact</p>
-            <h2>궁금한 게 있다면.</h2>
+            <h2 id="contact-title">문의</h2>
           </div>
           <ul className="contacts">
             {contacts.map((c) => (
               <li key={c.label}>
-                <a href={c.href} target="_blank" rel="noreferrer" className="contact">
+                <a
+                  href={c.href}
+                  className="contact"
+                  {...(c.external ? { target: "_blank", rel: "noreferrer" } : {})}
+                >
                   <span className="contact-label">{c.label}</span>
-                  <span className="contact-handle">{c.handle}</span>
-                  <span className="contact-arrow" aria-hidden>↗</span>
+                  <span className="contact-detail">{c.detail}</span>
+                  {c.external && <NewTab />}
                 </a>
               </li>
             ))}
@@ -149,11 +191,12 @@ export default function Home() {
 
       <footer className="footer">
         <div className="wrap footer-inner">
-          <a href="#top" className="brand" aria-label="맨 위로">
-            <LogoMark size={24} />
-            <span className="wordmark">IMPLUDE</span>
+          <p>
+            <span className="wordmark">IMPLUDE</span> · 한국디지털미디어고등학교
+          </p>
+          <a href="#main" className="to-top">
+            맨 위로 <span aria-hidden>↑</span>
           </a>
-          <p>© 2015–2026 IMPLUDE · 한국디지털미디어고등학교</p>
         </div>
       </footer>
     </>

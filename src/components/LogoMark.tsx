@@ -7,14 +7,16 @@ type Props = {
 
 // 원본 로고(public/brand/implude-logo.webp)를 1250 그리드 위에 다시 그린 벡터 버전.
 // 두 고리가 맞물리도록, 파랑이 위로 지나가는 교차점 두 곳은 마지막에 덧그립니다.
-export default function LogoMark({ size = 40, animated = false, className, title = "IMPLUDE" }: Props) {
+// title이 없으면 장식용으로 보고 스크린 리더에서 숨깁니다.
+export default function LogoMark({ size = 40, animated = false, className, title }: Props) {
   return (
     <svg
       viewBox="90 100 1075 1050"
       width={size}
       height={size}
-      role="img"
+      role={title ? "img" : undefined}
       aria-label={title}
+      aria-hidden={title ? undefined : true}
       className={[animated ? "logo-anim" : "", className].filter(Boolean).join(" ")}
     >
       <rect

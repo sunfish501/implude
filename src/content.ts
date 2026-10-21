@@ -26,7 +26,7 @@ export const projects: Project[] = [
   {
     name: "ASD",
     year: 2022,
-    image: "/projects/asd.webp",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH}/projects/asd.webp`,
     alt: "ASD 앱의 학습 일정 화면과 원통형 AI 스피커",
     summary:
       "공부할 때 휴대폰 때문에 집중이 끊기는 학생을 위한 서비스입니다. 직접 만든 AI 스피커 위에 휴대폰을 올리면 방해 금지 모드가 켜집니다.",
@@ -36,7 +36,7 @@ export const projects: Project[] = [
   {
     name: "잇는",
     year: 2022,
-    image: "/projects/itnun.webp",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH}/projects/itnun.webp`,
     alt: "잇는 앱의 청년 채용 공고 목록과 상세 화면",
     summary:
       "정부와 지자체의 지원 정책을 한곳에서 찾는 앱입니다. 착한가게와 채용 정보도 함께 보여 줍니다.",
@@ -49,7 +49,7 @@ export const projects: Project[] = [
   {
     name: "야미",
     year: 2023,
-    image: "/projects/yammy.webp",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH}/projects/yammy.webp`,
     alt: "손에 든 휴대폰에 표시된 야미 앱의 쿠킹 클래스 목록",
     summary:
       "요리를 배우고 싶은 사람이 쿠킹 클래스를 찾아 듣는 플랫폼입니다. 온라인 영상과 현장 강의를 모두 지원하고, 클래스를 연 사람에게 1:1로 질문할 수 있습니다.",
@@ -58,7 +58,7 @@ export const projects: Project[] = [
   {
     name: "VOAH",
     year: 2023,
-    image: "/projects/voah.webp",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH}/projects/voah.webp`,
     alt: "태블릿에 표시된 VOAH의 채팅과 문서 화면",
     summary:
       "여러 협업 도구를 오가며 일하는 소규모 팀을 위한 업무 관리 플랫폼입니다. 문서, 채팅, 일정을 한 창에서 다룹니다.",
@@ -67,7 +67,7 @@ export const projects: Project[] = [
   {
     name: "MOLA",
     year: 2020,
-    image: "/projects/mola.webp",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH}/projects/mola.webp`,
     alt: "영어 책 위에서 MOLA 앱으로 문장을 촬영하는 화면",
     summary:
       "영어 책을 읽다 모르는 단어를 만났을 때 쓰는 단어장 앱입니다. 카메라로 찍은 글자를 AI로 인식해 단어장에 담습니다.",
@@ -75,7 +75,7 @@ export const projects: Project[] = [
   {
     name: "디넌",
     year: 2020,
-    image: "/projects/dineon.webp",
+    image: `${process.env.NEXT_PUBLIC_BASE_PATH}/projects/dineon.webp`,
     alt: "디넌 앱의 로그인, 급식 시간, 공지 화면",
     summary:
       "디미고 학생이 그날의 급식 시간과 변경 사항을 확인하는 앱입니다. 디넌 공지사항도 함께 볼 수 있습니다.",

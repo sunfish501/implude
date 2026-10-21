@@ -38,6 +38,55 @@ export default function SiteHeader() {
     };
   }, []);
 
+  // 페이지 안 링크(#…)는 고정 헤더 아래까지 부드럽게 스크롤합니다.
+  // 모바일 메뉴가 닫히며 레이아웃이 바뀌므로 목표 위치는 매 프레임 다시 계산합니다.
+  useEffect(() => {
+    let frame = 0;
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+      const id = link?.getAttribute("href")?.slice(1);
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+
+      const header = document.querySelector<HTMLElement>(".nav-inner");
+      const destination = () =>
+        Math.max(0, target.getBoundingClientRect().top + window.scrollY - (header?.offsetHeight ?? 0) - 16);
+      const finish = () => {
+        history.pushState(null, "", `#${id}`);
+        if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      };
+
+      cancelAnimationFrame(frame);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, destination());
+          finish();
+        });
+        return;
+      }
+
+      const start = window.scrollY;
+      const duration = Math.min(1000, 450 + Math.abs(destination() - start) / 6);
+      const startTime = performance.now();
+      const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+      const step = (now: number) => {
+        const t = Math.min(1, (now - startTime) / duration);
+        window.scrollTo(0, start + (destination() - start) * ease(t));
+        if (t < 1) frame = requestAnimationFrame(step);
+        else finish();
+      };
+      frame = requestAnimationFrame(step);
+    };
+    document.addEventListener("click", onClick);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {

@@ -24,9 +24,13 @@
   box-sizing: border-box;
 }
 
+/* 페이지 안 이동 애니메이션은 SiteHeader에서 처리합니다 */
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
+[tabindex="-1"]:focus {
+  outline: none;
 }
 
 body {
@@ -892,10 +896,6 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   .logo-anim .ring-blue,
   .logo-anim .ring-black rect,
   .logo-anim .ring-over {

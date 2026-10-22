@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import LogoMark from "@/components/LogoMark";
 import { APPLY_FORM_URL, sections } from "@/content";
+import { useTheme } from "@/components/theme";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const { theme, toggle: toggleTheme } = useTheme();
 
   // 화면 위쪽 1/3 지점을 지난 마지막 섹션을 현재 위치로 표시
   useEffect(() => {
@@ -139,6 +141,27 @@ export default function SiteHeader() {
           지원서 작성<span className="ext" aria-hidden>↗</span>
           <span className="sr-only">(새 창)</span>
         </a>
+
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === "dark" ? "라이트 모드로 전환" : "다크 모드로 전환"}
+          title={theme === "dark" ? "라이트 모드" : "다크 모드"}
+        >
+          {theme === "dark" ? (
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
+              <circle cx="12" cy="12" r="4.5" fill="currentColor" />
+              <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+              </g>
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
+              <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" fill="currentColor" />
+            </svg>
+          )}
+        </button>
 
         <button
           ref={toggleRef}

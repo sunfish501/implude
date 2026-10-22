@@ -1,12 +1,17 @@
+/* 라이트가 기본. 다크는 시스템 설정을 따르고, 헤더 버튼으로 고르면 html[data-theme]이 우선합니다 */
 :root {
   --bg: #ffffff;
   --paper: #f4f7ff;
+  --surface: #ffffff;
   --line: #e2e8f6;
   --ink: #111114;
   --ink-soft: #5b6275; /* 흰 배경 6.1:1 */
   --blue: #4876ff; /* 로고와 큰 제목 전용 (흰 배경 3.95:1) */
-  --accent: #2f5bea; /* 글자·버튼용 (흰 배경 5.5:1) */
+  --accent: #2f5bea; /* 글자용 (흰 배경 5.5:1) */
   --accent-strong: #2147c4;
+  --btn-bg: #2f5bea; /* 흰 글자 5.5:1 */
+  --btn-bg-hover: #2147c4;
+  --nav-bg: rgb(255 255 255 / 0.92);
   --recruit-bg: #2450d8;
   --recruit-soft: #dee5f9; /* 모집 영역 보조 글자 (5.2:1) */
 
@@ -16,6 +21,45 @@
   --section-y: 96px;
   --pill: 999px;
   color-scheme: light;
+}
+
+/* 대비: ink 16.5:1, ink-soft 8.4:1, accent 8.3:1(배경 기준), 버튼 흰 글자 5.8:1, 모집 영역 흰 글자 8.1:1 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1016;
+    --paper: #161a24;
+    --surface: #161a24;
+    --line: #262b38;
+    --ink: #eceff6;
+    --ink-soft: #a4acbf;
+    --blue: #6d8fff;
+    --accent: #8ea8ff;
+    --accent-strong: #b3c4ff;
+    --btn-bg: #3459e0;
+    --btn-bg-hover: #2a4cc8;
+    --nav-bg: rgb(14 16 22 / 0.88);
+    --recruit-bg: #2244b8;
+    --recruit-soft: #d3dcf7;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0e1016;
+  --paper: #161a24;
+  --surface: #161a24;
+  --line: #262b38;
+  --ink: #eceff6;
+  --ink-soft: #a4acbf;
+  --blue: #6d8fff;
+  --accent: #8ea8ff;
+  --accent-strong: #b3c4ff;
+  --btn-bg: #3459e0;
+  --btn-bg-hover: #2a4cc8;
+  --nav-bg: rgb(14 16 22 / 0.88);
+  --recruit-bg: #2244b8;
+  --recruit-soft: #d3dcf7;
+  color-scheme: dark;
 }
 
 *,
@@ -98,7 +142,7 @@ img {
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   transform: translateY(-200%);
 }
 
@@ -127,7 +171,7 @@ img {
   min-height: 48px;
   padding: 0 24px;
   border-radius: var(--pill);
-  background: var(--accent);
+  background: var(--btn-bg);
   color: #fff;
   font-weight: 700;
   font-size: 16px;
@@ -135,11 +179,11 @@ img {
 }
 
 .btn:hover {
-  background: var(--accent-strong);
+  background: var(--btn-bg-hover);
 }
 
 .btn:active {
-  background: var(--ink);
+  background: #111114;
 }
 
 .btn-sm {
@@ -173,7 +217,7 @@ img {
 }
 
 .btn-invert:active {
-  background: var(--ink);
+  background: #111114;
   color: #fff;
 }
 
@@ -183,11 +227,11 @@ img {
 }
 
 .btn-outline-light:hover {
-  background: var(--accent-strong);
+  background: rgb(255 255 255 / 0.14);
 }
 
 .btn-outline-light:active {
-  background: var(--ink);
+  background: #111114;
 }
 
 .recruit :focus-visible {
@@ -220,7 +264,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgb(255 255 255 / 0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -278,6 +322,32 @@ img {
 .mobile-menu a[aria-current="location"] {
   color: var(--accent);
   font-weight: 700;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pill);
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.theme-toggle:hover {
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+.theme-toggle:active {
+  background: var(--line);
 }
 
 .menu-toggle {
@@ -570,6 +640,7 @@ img {
 .project.spotlight-card {
   flex: 1;
   padding: 0;
+  background-color: var(--surface);
   border-radius: 20px;
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -918,6 +989,11 @@ img {
 
   .menu-toggle {
     display: inline-flex;
+    margin-left: 4px;
+  }
+
+  .theme-toggle {
+    margin-left: auto;
   }
 
   .hero {

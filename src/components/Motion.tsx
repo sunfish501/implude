@@ -8,6 +8,7 @@ import BlurText from "@/components/reactbits/BlurText";
 import DotGrid from "@/components/reactbits/DotGrid";
 import ScrollVelocity from "@/components/reactbits/ScrollVelocity";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import { useTheme } from "@/components/theme";
 
 type RevealProps = Omit<ComponentProps<typeof AnimatedContent>, "children"> & { children: ReactNode };
 
@@ -21,13 +22,15 @@ export function Reveal({ children, ...props }: RevealProps) {
 }
 
 export function HeroDots() {
+  const { theme } = useTheme();
+  const dark = theme === "dark";
   return (
     <div className="hero-dots" aria-hidden>
       <DotGrid
         dotSize={4}
         gap={22}
-        baseColor="#dbe3f8"
-        activeColor="#4876ff"
+        baseColor={dark ? "#283049" : "#dbe3f8"}
+        activeColor={dark ? "#6d8fff" : "#4876ff"}
         proximity={130}
         shockRadius={260}
         shockStrength={4}
@@ -66,10 +69,11 @@ export function BrandBand() {
 }
 
 export function ProjectCard({ children }: { children: ReactNode }) {
+  const { theme } = useTheme();
   return (
     <SpotlightCard
-      theme="light"
-      spotlightColor="#4876ff"
+      theme={theme}
+      spotlightColor={theme === "dark" ? "#6d8fff" : "#4876ff"}
       intensity={0.5}
       borderGlow={0.9}
       spotlightSize={260}

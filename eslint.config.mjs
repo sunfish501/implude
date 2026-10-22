@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // React Bits(reactbits.dev)에서 가져온 원본 컴포넌트. 원본과 비교하기 쉽게 그대로 둡니다.
+    "src/components/reactbits/**",
   ]),
 ]);
 

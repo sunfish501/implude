@@ -446,32 +446,22 @@ img {
   height: auto;
 }
 
-/* 파랑이 먼저 그려지고, 검정이 맞물린 뒤, 교차점이 잠깁니다 */
+/* 두 고리가 함께 그려지며 맞물립니다. 교차점(.ring-over)은 파란 고리와 같은 속도로 그려집니다 */
 .logo-anim .ring-blue,
-.logo-anim .ring-black rect {
+.logo-anim .ring-black rect,
+.logo-anim .ring-over rect {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  animation: draw 1.4s cubic-bezier(0.45, 0, 0.2, 1) 0.1s forwards;
 }
 
 .logo-anim .ring-black rect {
-  animation-delay: 0.55s;
-}
-
-.logo-anim .ring-over {
-  opacity: 0;
-  animation: lock 0.25s ease-out 1.6s forwards;
+  animation-delay: 0.25s;
 }
 
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
-  }
-}
-
-@keyframes lock {
-  to {
-    opacity: 1;
   }
 }
 
@@ -1001,10 +991,9 @@ img {
 
   .logo-anim .ring-blue,
   .logo-anim .ring-black rect,
-  .logo-anim .ring-over {
+  .logo-anim .ring-over rect {
     animation: none;
     stroke-dashoffset: 0;
-    opacity: 1;
   }
 
   *,

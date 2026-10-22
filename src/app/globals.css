@@ -446,17 +446,21 @@ img {
   height: auto;
 }
 
-/* 두 고리가 함께 그려지며 맞물립니다. 교차점(.ring-over)은 파란 고리와 같은 속도로 그려집니다 */
+/* 검정 고리를 먼저 두른 뒤 파란 고리가 그 위아래를 번갈아 지나며 감깁니다.
+   교차점(.ring-over)은 파란 고리와 같은 속도로 그려집니다 */
 .logo-anim .ring-blue,
 .logo-anim .ring-black rect,
 .logo-anim .ring-over rect {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: draw 1.4s cubic-bezier(0.45, 0, 0.2, 1) 0.1s forwards;
+  animation: draw 1s cubic-bezier(0.45, 0, 0.25, 1) 0.1s forwards;
 }
 
-.logo-anim .ring-black rect {
-  animation-delay: 0.25s;
+.logo-anim .ring-blue,
+.logo-anim .ring-over rect {
+  animation-duration: 1.1s;
+  animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+  animation-delay: 1s;
 }
 
 @keyframes draw {

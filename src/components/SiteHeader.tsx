@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import LogoMark from "@/components/LogoMark";
-import { sections } from "@/content";
+import { APPLY_FORM_URL, sections } from "@/content";
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -135,6 +135,11 @@ export default function SiteHeader() {
           <ul>{links}</ul>
         </nav>
 
+        <a href={APPLY_FORM_URL} target="_blank" rel="noreferrer" className="btn btn-sm nav-cta">
+          지원서 작성<span className="ext" aria-hidden>↗</span>
+          <span className="sr-only">(새 창)</span>
+        </a>
+
         <button
           ref={toggleRef}
           type="button"
@@ -151,6 +156,12 @@ export default function SiteHeader() {
       <nav id="mobile-menu" className="mobile-menu" aria-label="모바일 메뉴" hidden={!open}>
         <ul className="wrap">
           {links}
+          <li>
+            <a href={APPLY_FORM_URL} target="_blank" rel="noreferrer" className="btn mobile-cta">
+              지원서 작성<span className="ext" aria-hidden>↗</span>
+              <span className="sr-only">(새 창)</span>
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
